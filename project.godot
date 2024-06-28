@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Kelbellum"
-run/main_scene="res://Scenes/Dev/EVA_UnitTest.tscn"
+run/main_scene="res://scenes/Dev/EVA_UnitTest.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerManager="*res://Scripts/Globals/PlayerManager.gd"
-StaticDataManager="*res://Scripts/Globals/StaticDataManager.gd"
+PlayerManager="*res://scenes/globals/PlayerManager.gd"
+StaticDataManager="*res://scenes/globals/StaticDataManager.gd"
 
 [display]
 
