@@ -25,7 +25,7 @@ func _physics_process(delta):
 	# MOVEMENT
 	handle_movement(delta)
 	handle_aim()
-	handle_move_animation()
+	#handle_move_animation()
 	# ABILITIES
 	handle_abilities()
 
@@ -78,24 +78,24 @@ func handle_aim():
 		else:
 			Body.look_at(look_dir)
 
-func handle_move_animation():
-	var move_length = raw_move_input.length()
-	if move_length >= 0.5:
-		var flat_aim = Vector2(Body.global_transform.basis.z.x, Body.global_transform.basis.z.z)
-		var angle_to_aim = raw_move_input.angle_to(flat_aim*-1)/ PI
-		var left = -1
-		if angle_to_aim < 0:
-			left = 1
-		var blend_x = (abs(abs(angle_to_aim) - 0.5) - 0.5) * -2 * left
-		var blend_y = ((abs(angle_to_aim) * 2) - 1) * -1
-		MyAnimationTree["parameters/IsRunning/blend_amount"] = true
-		MyAnimationTree["parameters/WalkRunBlend/blend_amount"] = parametric_blend(remap(move_length, 0.5, 1, 0, 1))
-		MyAnimationTree["parameters/WalkBlend/blend_position"].x = blend_x
-		MyAnimationTree["parameters/WalkBlend/blend_position"].y = blend_y
-		MyAnimationTree["parameters/RunBlend/blend_position"].x = blend_x
-		MyAnimationTree["parameters/RunBlend/blend_position"].y = blend_y
-	else:
-		MyAnimationTree["parameters/IsRunning/blend_amount"] = false
+#func handle_move_animation():
+#	var move_length = raw_move_input.length()
+#	if move_length >= 0.5:
+#		var flat_aim = Vector2(Body.global_transform.basis.z.x, Body.global_transform.basis.z.z)
+#		var angle_to_aim = raw_move_input.angle_to(flat_aim*-1)/ PI
+#		var left = -1
+#		if angle_to_aim < 0:
+#			left = 1
+#		var blend_x = (abs(abs(angle_to_aim) - 0.5) - 0.5) * -2 * left
+#		var blend_y = ((abs(angle_to_aim) * 2) - 1) * -1
+#		MyAnimationTree["parameters/IsRunning/blend_amount"] = true
+#		MyAnimationTree["parameters/WalkRunBlend/blend_amount"] = parametric_blend(remap(move_length, 0.5, 1, 0, 1))
+#		MyAnimationTree["parameters/WalkBlend/blend_position"].x = blend_x
+#		MyAnimationTree["parameters/WalkBlend/blend_position"].y = blend_y
+#		MyAnimationTree["parameters/RunBlend/blend_position"].x = blend_x
+#		MyAnimationTree["parameters/RunBlend/blend_position"].y = blend_y
+#	else:
+#		MyAnimationTree["parameters/IsRunning/blend_amount"] = false
 
 func handle_abilities():
 	if is_using_primary():
