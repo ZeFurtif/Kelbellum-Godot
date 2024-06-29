@@ -13,7 +13,7 @@ uv1_triplanar = true
 material = SubResource("StandardMaterial3D_2q7rx")
 size = Vector3(100, 1, 100)
 
-[node name="EvaUnitTest" type="Node3D"]
+[node name="SinglePlayerTest" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 9)
@@ -24,13 +24,14 @@ size = 10.0
 transform = Transform3D(0.927334, 0.0655897, 0.368442, -0.374234, 0.162528, 0.91298, 0, -0.984522, 0.175264, 0, 2.55357, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_8wnd5")]
+keyboard_control = true
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Floor" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape3D_21iqk")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Area3D"]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 mesh = SubResource("BoxMesh_nyhip")
 
