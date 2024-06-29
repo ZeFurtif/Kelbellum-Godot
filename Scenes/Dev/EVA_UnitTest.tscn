@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://do6li0cepk1h7"]
 
-[ext_resource type="PackedScene" uid="uid://m63l4ut23ud3" path="res://scenes/Player.tscn" id="1_8wnd5"]
+[ext_resource type="PackedScene" uid="uid://m63l4ut23ud3" path="res://scenes/player/Player.tscn" id="1_8wnd5"]
 [ext_resource type="Texture2D" uid="uid://c3tsgpq3k48ho" path="res://assets/_debug/GridTextures/Dark/texture_02.png" id="2_16h13"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_21iqk"]
@@ -24,7 +24,6 @@ size = 10.0
 transform = Transform3D(0.927334, 0.0655897, 0.368442, -0.374234, 0.162528, 0.91298, 0, -0.984522, 0.175264, 0, 2.55357, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_8wnd5")]
-PLAYER_ID = -1
 SPEED = 4
 
 [node name="Area3D" type="Area3D" parent="."]
