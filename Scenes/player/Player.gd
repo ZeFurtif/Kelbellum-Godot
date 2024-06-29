@@ -7,7 +7,7 @@ extends Node3D
 @onready var MyAnimationTree = $PlayerBody/Visuals/PlayerModel/AnimationTree
 
 #PUBLIC
-@export var PLAYER_ID = -1
+@export var PLAYER_ID = 0
 @export var CHARACTER_ID = 0
 @export var SPEED = 300
 @export var SIGHT_RANGE = 5
@@ -37,7 +37,7 @@ func handle_movement(delta):
 		raw_move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		raw_move_input = raw_move_input.normalized()
 	else:
-		var controllerId = PlayerManager.get_controllerId(PLAYER_ID)
+		var controllerId = ControllerManager.get_controller_id(PLAYER_ID)
 		if controllerId != -1:
 			raw_move_input.x = Input.get_joy_axis(controllerId,JOY_AXIS_LEFT_X)
 			raw_move_input.y = Input.get_joy_axis(controllerId,JOY_AXIS_LEFT_Y)
@@ -58,7 +58,7 @@ func handle_aim():
 		else:
 			look_dir = Vector3.ZERO
 	else: # CONTROLLER
-		var controllerId = PlayerManager.get_controllerId(PLAYER_ID)
+		var controllerId = ControllerManager.get_controller_id(PLAYER_ID)
 		if controllerId != -1: # CHECK IF CONTROLLER CONNECTED
 			raw_input.x = Input.get_joy_axis(controllerId, JOY_AXIS_RIGHT_X)
 			raw_input.y = Input.get_joy_axis(controllerId, JOY_AXIS_RIGHT_Y)
@@ -144,7 +144,7 @@ func is_using_primary():
 		if Input.is_action_just_pressed("primary"):
 			return true
 	else:
-		var controllerId = PlayerManager.get_controllerId(PLAYER_ID)
+		var controllerId = ControllerManager.get_controller_id(PLAYER_ID)
 		if controllerId != -1:
 			if Input.get_joy_axis(controllerId,JOY_AXIS_TRIGGER_RIGHT) > 0.5:
 				return true
@@ -155,7 +155,7 @@ func is_using_secondary():
 		if Input.is_action_just_pressed("secondary"):
 			return true
 	else:
-		var controllerId = PlayerManager.get_controllerId(PLAYER_ID)
+		var controllerId = ControllerManager.get_controller_id(PLAYER_ID)
 		if controllerId != -1:
 			if Input.get_joy_axis(controllerId,JOY_AXIS_TRIGGER_LEFT) > 0.5:
 				return true
@@ -166,7 +166,7 @@ func is_using_ultimate():
 		if Input.is_action_just_pressed("ultimate"):
 			return true
 	else:
-		var controllerId = PlayerManager.get_controllerId(PLAYER_ID)
+		var controllerId = ControllerManager.get_controller_id(PLAYER_ID)
 		if controllerId != -1:
 			if Input.is_joy_button_pressed(controllerId, JOY_BUTTON_LEFT_SHOULDER) and Input.is_joy_button_pressed(controllerId, JOY_BUTTON_RIGHT_SHOULDER):
 				return true
