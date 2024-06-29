@@ -20,13 +20,13 @@ func move_camera() -> void:
 	var player_count : int = 0 # Count players
 	for player_id in player_manager.players:
 		if player_manager.players[player_id]: # Add everything
-			sigma_position += player_manager.players[player_id].get_child(0).position
-			all_pos_x.append(player_manager.players[player_id].get_child(0).position.x)
-			all_pos_z.append(player_manager.players[player_id].get_child(0).position.z)
+			sigma_position += player_manager.players[player_id].global_position
+			all_pos_x.append(player_manager.players[player_id].global_position.x)
+			all_pos_z.append(player_manager.players[player_id].global_position.z)
 			player_count += 1 
 	sigma_position = sigma_position / player_count # Average player position
 	var distance_left_right : float = all_pos_x.max() - all_pos_x.min() # Max distance between players on x axis
-	var distance_up_down : float = ((all_pos_z.max() - all_pos_z.min()) * screen_ratio) + 5 # Max distance between players on z axis 
-	self.size = clamp(max(distance_left_right, distance_up_down) + 5, min_size, max_size)  # Have the max distance set the size of the camera view
-	self.position = sigma_position + offset # Update the camera position
+	var distance_up_down : float = ((all_pos_z.max() - all_pos_z.min()) * screen_ratio) # Max distance between players on z axis 
+	size = clamp(max(distance_left_right, distance_up_down) + 5, min_size, max_size)  # Have the max distance set the size of the camera view
+	position = sigma_position + offset # Update the camera position
 	return 

@@ -19,6 +19,6 @@ func spawn_players() -> void:
 		if ControllerManager.players_controller_id[player_id] != -1:
 			var player : Player = player_scene.instantiate()
 			players[player_id] = player
-			player._player_id = player_id
+			player.player_id = player_id
 			call_deferred("add_child", player)
 	return

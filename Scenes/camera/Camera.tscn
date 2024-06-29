@@ -5,3 +5,4 @@
 [node name="Camera" type="Camera3D"]
 projection = 1
 script = ExtResource("1_5inp2")
+min_size = 10.0
