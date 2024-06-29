@@ -1,35 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://btl50q3tcejym"]
+[gd_scene load_steps=10 format=3 uid="uid://btl50q3tcejym"]
 
+[ext_resource type="Script" path="res://scenes/player/player_hud/PlayerHUD.gd" id="1_a4ovw"]
 [ext_resource type="Texture2D" uid="uid://caqnwm4bl8d3w" path="res://assets/2D/sprites/Boldric.png" id="1_cd6xi"]
-[ext_resource type="PackedScene" uid="uid://cflc1x4op0g5u" path="res://scenes/player/player_hud/spell_hud.tscn" id="2_bkng2"]
+[ext_resource type="Shader" path="res://assets/shaders/rhombus_mask.gdshader" id="2_0t3hj"]
+[ext_resource type="Shader" path="res://assets/shaders/circle_mask.gdshader" id="2_5f6vl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3afld"]
+shader = ExtResource("2_0t3hj")
+shader_parameter/offset = 0.25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkl4n"]
 bg_color = Color(0.901961, 0.901961, 0.901961, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3amxx"]
+shader = ExtResource("2_5f6vl")
+shader_parameter/clip = 0.5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abfai"]
 bg_color = Color(0.501961, 0.501961, 0.501961, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 20
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmpd1"]
 bg_color = Color(0.431373, 0.529412, 0.443137, 1)
+corner_radius_top_left = 1
+corner_radius_bottom_left = 1
 corner_detail = 20
+anti_aliasing = false
 
 [node name="PlayerHUD" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1400.0
-offset_bottom = -800.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+script = ExtResource("1_a4ovw")
 
 [node name="PlayerCard" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_3afld")
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -60.0
+offset_right = 237.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gkl4n")
@@ -38,15 +54,17 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_gkl4n")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 55.0
-offset_top = 3.0
-offset_right = -15.0
-offset_bottom = 26.0
+offset_left = 59.0
+offset_top = -4.0
+offset_right = -40.0
+offset_bottom = 24.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.101961, 0.101961, 0.101961, 1)
+theme_override_font_sizes/font_size = 20
 text = "BOLDRIC"
 
 [node name="Icon" type="TextureRect" parent="PlayerCard"]
+material = SubResource("ShaderMaterial_3amxx")
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -61,10 +79,10 @@ texture = ExtResource("1_cd6xi")
 
 [node name="HealthBar" type="ProgressBar" parent="PlayerCard"]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 24.0
-offset_right = 193.0
-offset_bottom = 30.0
+offset_left = 59.0
+offset_top = 21.0
+offset_right = 197.0
+offset_bottom = 28.0
 theme_override_styles/background = SubResource("StyleBoxFlat_abfai")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fmpd1")
 value = 50.0
@@ -75,29 +93,16 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = 33.0
-offset_right = -8.0
-offset_bottom = -8.0
+offset_left = 55.0
+offset_top = 29.0
+offset_right = -58.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpellHUD" parent="PlayerCard/SpellsContainer" instance=ExtResource("2_bkng2")]
-layout_mode = 2
-
-[node name="SpellHUD2" parent="PlayerCard/SpellsContainer" instance=ExtResource("2_bkng2")]
-layout_mode = 2
-
-[node name="SpellHUD3" parent="PlayerCard/SpellsContainer" instance=ExtResource("2_bkng2")]
-layout_mode = 2
-
-[node name="SpellHUD4" parent="PlayerCard/SpellsContainer" instance=ExtResource("2_bkng2")]
-layout_mode = 2
-
-[node name="SpellHUD5" parent="PlayerCard/SpellsContainer" instance=ExtResource("2_bkng2")]
-layout_mode = 2
-
 [node name="UpgradesContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 200.0
-offset_bottom = 33.0
+offset_left = 1.0
+offset_top = -41.0
+offset_right = 201.0
+offset_bottom = -8.0
