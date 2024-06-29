@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerManager="*res://scenes/globals/PlayerManager.gd"
-StaticDataManager="*res://scenes/globals/StaticDataManager.gd"
+ControllerManager="*res://scenes/globals/ControllerManager.gd"
+DataManager="*res://scenes/globals/DataManager.gd"
 
 [display]
 
