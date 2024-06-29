@@ -1,25 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://m63l4ut23ud3"]
 
-[ext_resource type="Script" path="res://scenes/PlayerController.gd" id="1_sxn4s"]
+[ext_resource type="Script" path="res://scenes/Player.gd" id="1_sxn4s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_slajy"]
 radius = 0.3
 height = 1.8
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_sxn4s")
-PLAYER_ID = 0
-SIGHT_RANGE = 25
 
-[node name="PlayerBody" type="CharacterBody3D" parent="."]
+[node name="Visuals" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Visuals" type="Node3D" parent="PlayerBody"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_slajy")
 
-[node name="RayCast3D" type="RayCast3D" parent="PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+[node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -5)
