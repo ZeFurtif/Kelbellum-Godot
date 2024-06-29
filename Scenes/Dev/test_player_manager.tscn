@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://hsi4i0mpwd51"]
+
+[ext_resource type="PackedScene" uid="uid://dsoawmynwyfnr" path="res://scenes/player_manager/PlayerManager.tscn" id="1_sonyt"]
+[ext_resource type="Texture2D" uid="uid://c3tsgpq3k48ho" path="res://assets/_debug/GridTextures/Dark/texture_02.png" id="2_m73ew"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_21iqk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2q7rx"]
+albedo_texture = ExtResource("2_m73ew")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_nyhip"]
+material = SubResource("StandardMaterial3D_2q7rx")
+size = Vector3(100, 1, 100)
+
+[node name="EvaUnitTest" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 9)
+projection = 1
+size = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.927334, 0.0655897, 0.368442, -0.374234, 0.162528, 0.91298, 0, -0.984522, 0.175264, 0, 2.55357, 0)
+
+[node name="PlayerManager" parent="." instance=ExtResource("1_sonyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("WorldBoundaryShape3D_21iqk")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_nyhip")
+
+[node name="Target" type="Node3D" parent="." groups=["Target"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03887, 1.6877, 5.13009)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Target"]
+use_collision = true
