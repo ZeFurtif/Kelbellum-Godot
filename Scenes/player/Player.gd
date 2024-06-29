@@ -26,6 +26,7 @@ func _ready() -> void :
 	# Debug Mode
 	if keyboard_control :
 		_controller_id = -1
+		
 		return
 	
 	# check if have controller
@@ -35,11 +36,12 @@ func _ready() -> void :
 
 func _process(delta : float) -> void :
 	# waiting for controller
-	if _controller_id == -1 :
-		_controller_id = ControllerManager.get_controller_id(_player_id)
-		if _controller_id != -1 :
-			set_physics_process(true)
-		return
+	if not keyboard_control :
+		if _controller_id == -1 :
+			_controller_id = ControllerManager.get_controller_id(_player_id)
+			if _controller_id != -1 :
+				set_physics_process(true)
+			return
 	
 	# normal process
 	handle_aim()
