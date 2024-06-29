@@ -1,6 +1,6 @@
 extends Node3D
 
-@export_file("*.tscn") var player_scene: String = "res://scenes/player/Player.tscn"
+@export_file("*.tscn") var player_path: String = "res://scenes/player/Player.tscn"
 
 var players : Dictionary = {
 	0 : null,
@@ -14,11 +14,11 @@ func _ready() -> void:
 	return
 	
 func spawn_players() -> void:
-	var player = load(player_scene)
-	for player_id in range(0, 4):
-		if ControllerManager.players_controller_id[player_id] != 0:
-			var player_copy = player.instantiate()
-			players[player_id] = player_copy
-			player_copy.PLAYER_ID = player_id
-			call_deferred("add_child", player_copy)
+	var player_scene : PackedScene = load(player_path)
+	for player_id in range(4):
+		if ControllerManager.players_controller_id[player_id] != -1:
+			var player : Player = player_scene.instantiate()
+			players[player_id] = player
+			player._player_id = player_id
+			call_deferred("add_child", player)
 	return

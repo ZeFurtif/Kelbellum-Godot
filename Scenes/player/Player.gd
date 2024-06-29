@@ -14,9 +14,9 @@ var primary_reset : bool = true
 var secondary_reset : bool = true
 var ultimate_reset : bool = true
 
-var _player_id : int = 0
-var _character_id : int = -1
-var _controller_id : int = -1
+var player_id : int = 0
+var character_id : int = -1
+var controller_id : int = -1
 
 @onready var Raycast : RayCast3D = $RayCast3D
 @onready var Camera : Camera3D = get_viewport().get_camera_3d()
@@ -25,23 +25,21 @@ var _controller_id : int = -1
 func _ready() -> void :
 	# Debug Mode
 	if keyboard_control :
-		_controller_id = -1
-		
+		controller_id = -1
 		return
 	
 	# check if have controller
-	if _controller_id == -1 :
+	if controller_id == -1 :
 		set_physics_process(false)
 	return
 
 func _process(delta : float) -> void :
 	# waiting for controller
-	if not keyboard_control :
-		if _controller_id == -1 :
-			_controller_id = ControllerManager.get_controller_id(_player_id)
-			if _controller_id != -1 :
-				set_physics_process(true)
-			return
+	if controller_id == -1 :
+		controller_id = ControllerManager.get_controller_id(player_id)
+		if controller_id != -1 :
+			set_physics_process(true)
+		return
 	
 	# normal process
 	handle_aim()
@@ -60,8 +58,8 @@ func handle_movement(delta : float) -> void :
 		raw_move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		raw_move_input = raw_move_input.normalized()
 	else:
-		raw_move_input.x = Input.get_joy_axis(_controller_id, JOY_AXIS_LEFT_X)
-		raw_move_input.y = Input.get_joy_axis(_controller_id, JOY_AXIS_LEFT_Y)
+		raw_move_input.x = Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_X)
+		raw_move_input.y = Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_Y)
 	
 	if raw_move_input.length() >= JOYSTICK_DEAD_ZONE :
 		velocity.x = raw_move_input.x * SPEED * raw_move_input.length()
@@ -80,8 +78,8 @@ func handle_aim() -> void :
 		else :
 			look_dir = Vector3.ZERO
 	else :
-		raw_input.x = Input.get_joy_axis(_controller_id, JOY_AXIS_RIGHT_X)
-		raw_input.y = Input.get_joy_axis(_controller_id, JOY_AXIS_RIGHT_Y)
+		raw_input.x = Input.get_joy_axis(controller_id, JOY_AXIS_RIGHT_X)
+		raw_input.y = Input.get_joy_axis(controller_id, JOY_AXIS_RIGHT_Y)
 		if abs(raw_input.length()) < JOYSTICK_DEAD_ZONE : # IF NO AIM INPUT STICK TO VELOCITY
 			if abs(velocity.x * velocity.z) >= JOYSTICK_DEAD_ZONE : # CHECK VELOCITY IF NOT FUCK YOU
 				look_dir = position
@@ -164,7 +162,7 @@ func is_using_primary() -> bool :
 		if Input.is_action_just_pressed("primary"):
 			return true
 	else :
-		if Input.get_joy_axis(_controller_id, JOY_AXIS_TRIGGER_RIGHT) > TRIGGER_DEAD_ZONE :
+		if Input.get_joy_axis(controller_id, JOY_AXIS_TRIGGER_RIGHT) > TRIGGER_DEAD_ZONE :
 			return true
 	return false
 
@@ -173,7 +171,7 @@ func is_using_secondary() -> bool :
 		if Input.is_action_just_pressed("secondary"):
 			return true
 	else:
-		if Input.get_joy_axis(_controller_id, JOY_AXIS_TRIGGER_LEFT) > TRIGGER_DEAD_ZONE:
+		if Input.get_joy_axis(controller_id, JOY_AXIS_TRIGGER_LEFT) > TRIGGER_DEAD_ZONE:
 			return true
 	return false
 
@@ -182,7 +180,7 @@ func is_using_ultimate() -> bool :
 		if Input.is_action_just_pressed("ultimate"):
 			return true
 	else :
-		if Input.is_joy_button_pressed(_controller_id, JOY_BUTTON_LEFT_SHOULDER) and Input.is_joy_button_pressed(_controller_id, JOY_BUTTON_RIGHT_SHOULDER):
+		if Input.is_joy_button_pressed(controller_id, JOY_BUTTON_LEFT_SHOULDER) and Input.is_joy_button_pressed(controller_id, JOY_BUTTON_RIGHT_SHOULDER):
 			return true
 	return false
 
