@@ -9,5 +9,5 @@ void fragment() {
 	if (UV.x < cutoff_left || UV.x > cutoff_right) {
 		alpha = 0.0;
 	}
-	COLOR = vec4(texture(TEXTURE,UV).rgb, alpha);
+	COLOR = vec4(0.8,0.8,0.8, alpha);
 }
