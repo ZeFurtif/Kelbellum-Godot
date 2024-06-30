@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmny0jg5y66vj"]
+
+[ext_resource type="Texture2D" uid="uid://cddw4ddbshpua" path="res://assets/2D/ui/icons/icon_arrow.png" id="1_6qwqr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_folw0"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+
+[node name="UpgradesHUD" type="Panel"]
+custom_minimum_size = Vector2(33, 33)
+theme_override_styles/panel = SubResource("StyleBoxFlat_folw0")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Arrow" type="TextureRect" parent="Icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 46.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+scale = Vector2(0.18, 0.2)
+pivot_offset = Vector2(50, 50)
+texture = ExtResource("1_6qwqr")

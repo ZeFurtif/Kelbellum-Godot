@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=3 uid="uid://btl50q3tcejym"]
+
+[ext_resource type="Script" path="res://scenes/player/player_hud/PlayerHUD.gd" id="1_a4ovw"]
+[ext_resource type="Texture2D" uid="uid://caqnwm4bl8d3w" path="res://assets/2D/sprites/Boldric.png" id="1_cd6xi"]
+[ext_resource type="Shader" path="res://assets/shaders/rhombus_mask.gdshader" id="2_0t3hj"]
+[ext_resource type="Shader" path="res://assets/shaders/circle_mask.gdshader" id="2_5f6vl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3afld"]
+shader = ExtResource("2_0t3hj")
+shader_parameter/offset = 0.2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkl4n"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3amxx"]
+shader = ExtResource("2_5f6vl")
+shader_parameter/clip = 0.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abfai"]
+bg_color = Color(0.501961, 0.501961, 0.501961, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmpd1"]
+bg_color = Color(0.431373, 0.529412, 0.443137, 1)
+corner_radius_top_left = 1
+corner_radius_bottom_left = 1
+corner_detail = 20
+anti_aliasing = false
+
+[node name="PlayerCard" type="Panel"]
+material = SubResource("ShaderMaterial_3afld")
+custom_minimum_size = Vector2(230, 50)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 259.0
+offset_bottom = 50.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_gkl4n")
+script = ExtResource("1_a4ovw")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 59.0
+offset_top = -4.0
+offset_right = -40.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.101961, 0.101961, 0.101961, 1)
+theme_override_font_sizes/font_size = 20
+text = "BOLDRIC"
+
+[node name="Icon" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_3amxx")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -22.0
+offset_right = 71.0
+offset_bottom = 42.0
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_cd6xi")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = -3.0
+offset_right = -34.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_abfai")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fmpd1")
+value = 50.0
+show_percentage = false
+
+[node name="SpellsContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = 30.0
+offset_right = -52.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpgradesContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -41.0
+offset_right = 201.0
+offset_bottom = -8.0
