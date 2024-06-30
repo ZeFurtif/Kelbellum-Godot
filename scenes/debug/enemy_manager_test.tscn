@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://chthg00om6otb"]
+
+[ext_resource type="PackedScene" uid="uid://dfy37hi6hbngm" path="res://scenes/camera/camera_free_look.tscn" id="1_n10p4"]
+[ext_resource type="Texture2D" uid="uid://c3tsgpq3k48ho" path="res://assets/_debug/GridTextures/Dark/texture_02.png" id="2_m2wuv"]
+[ext_resource type="PackedScene" uid="uid://kkojbeiabtp8" path="res://scenes/level/enemy_manager.tscn" id="3_6ts41"]
+[ext_resource type="PackedScene" uid="uid://cw7kory6x3lu" path="res://scenes/enemy/enemy_debug0.tscn" id="4_pdejo"]
+[ext_resource type="PackedScene" uid="uid://br7kmgjby5jl7" path="res://scenes/enemy/enemy_debug1.tscn" id="5_7c5xk"]
+[ext_resource type="PackedScene" uid="uid://c4op1clyoxe0k" path="res://scenes/enemy/enemy_debug2.tscn" id="6_da3gg"]
+[ext_resource type="PackedScene" uid="uid://cuulklj8sbyap" path="res://scenes/enemy/enemy_debug3.tscn" id="7_vngsv"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ka1pv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2q7rx"]
+albedo_texture = ExtResource("2_m2wuv")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_s0nbg"]
+material = SubResource("StandardMaterial3D_2q7rx")
+size = Vector3(100, 1, 100)
+
+[node name="EnemyManagerTest" type="Node3D"]
+
+[node name="CameraFreeLook" parent="." instance=ExtResource("1_n10p4")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -42.187, 19.6291, -0.298174)
+
+[node name="Floor" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_ka1pv")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_s0nbg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 19.9794, 0)
+
+[node name="EnemyManager" parent="." instance=ExtResource("3_6ts41")]
+debug_enable = true
+common_enemies_scene = Array[PackedScene]([ExtResource("4_pdejo"), ExtResource("5_7c5xk"), ExtResource("6_da3gg"), ExtResource("7_vngsv")])
+common_enemies_spawn_rate = Array[float]([0.25, 0.25, 0.25, 0.25])
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.6104, 1.52264, 0.572693)
+
+[node name="VisibleOnScreenNotifier3D2" type="VisibleOnScreenNotifier3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5051, 1.70253, 0)
+
+[node name="VisibleOnScreenNotifier3D3" type="VisibleOnScreenNotifier3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.6104, 1.52264, -36.3515)
+
+[node name="VisibleOnScreenNotifier3D4" type="VisibleOnScreenNotifier3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5051, 1.70253, -36.8702)
+
+[node name="VisibleOnScreenNotifier3D5" type="VisibleOnScreenNotifier3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.6104, 1.52264, 24.4557)
+
+[node name="VisibleOnScreenNotifier3D6" type="VisibleOnScreenNotifier3D" parent="EnemyManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5051, 1.70253, 40.1821)

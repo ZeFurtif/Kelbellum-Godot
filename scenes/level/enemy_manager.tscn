@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://kkojbeiabtp8"]
+
+[ext_resource type="Script" path="res://scenes/level/enemy_manager.gd" id="1_g1qil"]
+
+[node name="EnemyManager" type="Node3D"]
+script = ExtResource("1_g1qil")
+
+[node name="DebugSpawn" type="Timer" parent="."]
+
+[connection signal="timeout" from="DebugSpawn" to="." method="_on_debug_spawn_timeout"]
