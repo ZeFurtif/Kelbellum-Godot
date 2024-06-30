@@ -6,8 +6,8 @@ class_name Player extends CharacterBody3D
 # CONTROLLER DEAD ZONE
 const JOYSTICK_DEAD_ZONE : float = 0.5
 const TRIGGER_DEAD_ZONE : float = 0.1
-const SPEED : float = 10.0
-const SIGHT_RANGE : float = 5.0
+const SPEED : float = 5.0
+const SIGHT_RANGE : float = 20.0
 
 var raw_move_input : Vector2 = Vector2.ZERO
 var primary_reset : bool = true
@@ -27,19 +27,15 @@ func _ready() -> void :
 	if keyboard_control :
 		controller_id = -1
 		return
-	
-	# check if have controller
-	if controller_id == -1 :
-		set_physics_process(false)
-	return
 
 func _process(delta : float) -> void :
 	# waiting for controller
-	if controller_id == -1 :
-		controller_id = ControllerManager.get_controller_id(player_id)
-		if controller_id != -1 :
-			set_physics_process(true)
-		return
+	if not keyboard_control:
+		if controller_id == -1 :
+			controller_id = ControllerManager.get_controller_id(player_id)
+			if controller_id != -1 :
+				set_physics_process(true)
+			return
 	
 	# normal process
 	handle_aim()
@@ -51,9 +47,13 @@ func _physics_process(delta : float) -> void :
 	return
 
 func handle_movement(delta : float) -> void :
-	velocity = Vector3.ZERO
 	raw_move_input = Vector2.ZERO
 	
+	if not is_on_floor():
+		velocity.y = move_toward(velocity.y, -9.81, 1)
+	else:
+		velocity.y = 0
+		
 	if keyboard_control :
 		raw_move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		raw_move_input = raw_move_input.normalized()
@@ -64,6 +64,10 @@ func handle_movement(delta : float) -> void :
 	if raw_move_input.length() >= JOYSTICK_DEAD_ZONE :
 		velocity.x = raw_move_input.x * SPEED * raw_move_input.length()
 		velocity.z = raw_move_input.y * SPEED * raw_move_input.length()
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
 	move_and_slide()
 
 func handle_aim() -> void :
@@ -91,7 +95,7 @@ func handle_aim() -> void :
 			look_dir.z += raw_input.y * SIGHT_RANGE
 	if abs(look_dir.length()) > JOYSTICK_DEAD_ZONE :
 		var corrected_look_dir = get_aimest_valid_target_position(look_dir, SIGHT_RANGE, false)
-		if abs(raw_input.length()) >= JOYSTICK_DEAD_ZONE :
+		if abs(raw_input.length()) >= JOYSTICK_DEAD_ZONE and not keyboard_control:
 			look_at(corrected_look_dir)
 		else:
 			look_at(look_dir)
@@ -138,7 +142,6 @@ func handle_abilities() -> void :
 
 func use_primary() -> void :
 	pass
-
 
 func get_aimest_valid_target_position(lookdir : Vector3, range : float, lineOfSight : bool) -> Vector3 :
 	var all_targets : Array[Node] = get_tree().get_nodes_in_group("Target")

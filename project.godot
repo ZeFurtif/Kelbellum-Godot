@@ -24,6 +24,7 @@ DataManager="*res://scenes/globals/DataManager.gd"
 window/size/viewport_width=1600
 window/size/viewport_height=900
 window/size/initial_position_type=2
+window/vsync/vsync_mode=0
 
 [dotnet]
 
