@@ -109,11 +109,11 @@ func _on_enemy_die() -> void :
 	return
 
 func _on_spawn_screen_entered(spawn : VisibleOnScreenNotifier3D) -> void :
-	available_spawns.append(spawn)
+	available_spawns.erase(spawn)
 	return
 	
 func _on_spawn_screen_exited(spawn : VisibleOnScreenNotifier3D) -> void :
-	available_spawns.erase(spawn)
+	available_spawns.append(spawn)
 	return
 	
 func _get_random_available_spawn() -> Node3D :
