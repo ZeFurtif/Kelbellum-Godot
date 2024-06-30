@@ -29,6 +29,10 @@ window/size/initial_position_type=2
 
 project/assembly_name="Kelbellum"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/datatable_godot/plugin.cfg")
+
 [input]
 
 move_left={
