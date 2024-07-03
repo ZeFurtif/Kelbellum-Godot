@@ -50,12 +50,11 @@ func _physics_process(delta : float) -> void :
 
 func handle_movement(delta : float) -> void :
 	raw_move_input = Vector2.ZERO
+	velocity = Vector3.ZERO
 	
 	if not is_on_floor():
-		velocity.y = move_toward(velocity.y, -9.81, 1)
-	else:
-		velocity.y = 0
-		
+		velocity.y = -9.81
+
 	if keyboard_control :
 		raw_move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		raw_move_input = raw_move_input.normalized()
@@ -66,10 +65,7 @@ func handle_movement(delta : float) -> void :
 	if raw_move_input.length() >= JOYSTICK_DEAD_ZONE :
 		velocity.x = raw_move_input.x * SPEED * raw_move_input.length()
 		velocity.z = raw_move_input.y * SPEED * raw_move_input.length()
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-		
+
 	move_and_slide()
 
 func handle_aim() -> void :
