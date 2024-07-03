@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=3 uid="uid://vs4ekbvbubjd"]
+
+[ext_resource type="Script" path="res://scenes/title_menu/title_menu.gd" id="1_nxl02"]
+[ext_resource type="Texture2D" uid="uid://bl3ddsomhvwch" path="res://assets/2D/ui/menu/title.png" id="1_xagpo"]
+[ext_resource type="Script" path="res://scenes/title_menu/debug_menu.gd" id="2_sdxqw"]
+
+[node name="TitleMenu" type="CanvasLayer"]
+script = ExtResource("1_nxl02")
+
+[node name="TitleScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameTitle" type="TextureRect" parent="TitleScreen"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -235.0
+offset_right = 231.0
+offset_bottom = 466.0
+grow_horizontal = 2
+texture = ExtResource("1_xagpo")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -184.0
+offset_top = -509.0
+offset_right = 184.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="PlayButton" type="Button" parent="TitleScreen/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="TitleScreen/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Settings"
+
+[node name="CreditsButton" type="Button" parent="TitleScreen/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="TitleScreen/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Quit"
+
+[node name="Debug" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -234.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("2_sdxqw")
+
+[node name="Label" type="Label" parent="Debug"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -235.0
+offset_bottom = 53.0
+grow_horizontal = 0
+text = "Debug Scenes"
+horizontal_alignment = 1
+
+[node name="DebugScenes" type="VBoxContainer" parent="Debug"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[connection signal="pressed" from="TitleScreen/ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="TitleScreen/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
