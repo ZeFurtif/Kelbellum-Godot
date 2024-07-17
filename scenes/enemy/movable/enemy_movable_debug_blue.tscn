@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1dpepcw4dqkf"]
+
+[ext_resource type="PackedScene" uid="uid://dwd8u75j1liei" path="res://scenes/enemy/movable/enemy_movable_debug.tscn" id="1_xnx41"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nct0j"]
+albedo_color = Color(0, 0, 0.882353, 1)
+
+[node name="EnemyDumbDebugRed" instance=ExtResource("1_xnx41")]
+
+[node name="MeshInstance3D" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nct0j")
