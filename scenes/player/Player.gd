@@ -8,6 +8,9 @@ const JOYSTICK_DEAD_ZONE : float = 0.5
 const TRIGGER_DEAD_ZONE : float = 0.1
 const SPEED : float = 5.0
 const SIGHT_RANGE : float = 20.0
+var GRAVITY : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var GRAVITY_DIRECTION : Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+
 
 var raw_move_input : Vector2 = Vector2.ZERO
 var monocible_reset : bool = true
@@ -52,19 +55,24 @@ func handle_movement(delta : float) -> void :
 	raw_move_input = Vector2.ZERO
 	velocity = Vector3.ZERO
 	
-	if not is_on_floor():
-		velocity.y = -9.81
-
+	if not is_on_floor() :
+		velocity += GRAVITY * GRAVITY_DIRECTION
+	else :
+		velocity.y = 0
+	
 	if keyboard_control :
 		raw_move_input = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		raw_move_input = raw_move_input.normalized()
-	else:
+	else :
 		raw_move_input.x = Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_X)
 		raw_move_input.y = Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_Y)
 	
 	if raw_move_input.length() >= JOYSTICK_DEAD_ZONE :
 		velocity.x = raw_move_input.x * SPEED * raw_move_input.length()
 		velocity.z = raw_move_input.y * SPEED * raw_move_input.length()
+	else :
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
 

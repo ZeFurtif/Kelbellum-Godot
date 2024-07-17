@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://b0ej3kt5dhggd"]
+
+[ext_resource type="PackedScene" uid="uid://dfy37hi6hbngm" path="res://scenes/camera/camera_free_look.tscn" id="1_bedmu"]
+[ext_resource type="Texture2D" uid="uid://c3tsgpq3k48ho" path="res://assets/_debug/GridTextures/Dark/texture_02.png" id="1_q24vm"]
+[ext_resource type="PackedScene" uid="uid://wxhjub4lbx72" path="res://scenes/enemy/movable/enemy_movable_debug_red.tscn" id="2_57h3i"]
+[ext_resource type="PackedScene" uid="uid://m63l4ut23ud3" path="res://scenes/player/Player.tscn" id="4_bbgu2"]
+[ext_resource type="Script" path="res://scenes/enemy/rush_player/enemy_reaching_nearest_player.gd" id="4_dbole"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_es0q8"]
+vertices = PackedVector3Array(-4.25, 0.128664, -9, -3.5, 0.128664, -9, -3.5, 0.128664, -48.75, -48.75, 0.128664, -4.25, -8.25, 0.128664, -4.25, -7.25, 0.128664, -6, -48.75, 0.128664, -48.75, -3, 0.128664, -9, 0.5, 0.128664, -5.5, 48.75, 0.128664, -5, 48.75, 0.128664, -48.75, 0.5, 0.128664, -5, -3.5, 1.32866, -6.75, -5, 1.42866, -5.5, -5.75, 1.32866, -4.25, -3, 0.228664, -1.75, -1, 0.228664, -4, -4.025, 0.728664, -4.025, -0.25, 0.128664, -4, -3, 0.128664, -1, -4, 0.128664, 48.75, 48.75, 0.128664, 48.75, -4, 0.128664, -0.25, -6.75, 0.128664, -2.25, -48.75, 0.128664, 48.75)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(0, 5, 2), PackedInt32Array(2, 5, 6), PackedInt32Array(6, 5, 3), PackedInt32Array(7, 1, 2), PackedInt32Array(7, 2, 8), PackedInt32Array(8, 2, 9), PackedInt32Array(9, 2, 10), PackedInt32Array(9, 11, 8), PackedInt32Array(15, 17, 16), PackedInt32Array(16, 17, 12), PackedInt32Array(12, 17, 13), PackedInt32Array(13, 17, 14), PackedInt32Array(14, 17, 15), PackedInt32Array(18, 11, 9), PackedInt32Array(18, 9, 19), PackedInt32Array(19, 9, 20), PackedInt32Array(20, 9, 21), PackedInt32Array(16, 18, 15), PackedInt32Array(15, 18, 19), PackedInt32Array(20, 22, 19), PackedInt32Array(3, 4, 23), PackedInt32Array(23, 22, 3), PackedInt32Array(3, 22, 20), PackedInt32Array(3, 20, 24)]
+cell_height = 0.1
+border_size = 1.0
+agent_radius = 1.0
+filter_ledge_spans = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ig8f"]
+albedo_texture = ExtResource("1_q24vm")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_fw6h3"]
+material = SubResource("StandardMaterial3D_7ig8f")
+size = Vector3(100, 1, 100)
+
+[sub_resource type="PrismMesh" id="PrismMesh_l12ry"]
+
+[node name="EnemyNavigationDebug" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.927334, 0.0655896, 0.368442, -0.374234, 0.162528, 0.912981, 0, -0.984522, 0.175264, 0, 20, 0)
+
+[node name="CameraFreeLook" parent="." instance=ExtResource("1_bedmu")]
+transform = Transform3D(-0.225222, 0.34324, -0.911845, -0.07435, 0.927107, 0.367349, 0.971466, 0.150531, -0.183285, -15.3448, 6.07274, -9.7063)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_es0q8")
+
+[node name="Floor" type="CSGMesh3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_fw6h3")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.66119, 3.60254, 3.4036, 4.91786, 0.902596, 0, -0.614416, 3.34769, -3.66271, -3.28434, -0.661108, -4.14967)
+use_collision = true
+mesh = SubResource("PrismMesh_l12ry")
+
+[node name="NavigationLink3D" type="NavigationLink3D" parent="NavigationRegion3D"]
+bidirectional = false
+start_position = Vector3(-4.76, 1.5, -5.611)
+end_position = Vector3(-7.034, 0, -6.137)
+
+[node name="EnemyReachingNearestPlayer" parent="." node_paths=PackedStringArray("players") instance=ExtResource("2_57h3i")]
+script = ExtResource("4_dbole")
+players = [NodePath("../Player")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+
+[node name="Player" parent="." instance=ExtResource("4_bbgu2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1994, 0, 0)
+keyboard_control = true

@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://m63l4ut23ud3" path="res://scenes/player/Player.tscn" id="1_8wnd5"]
 [ext_resource type="Texture2D" uid="uid://c3tsgpq3k48ho" path="res://assets/_debug/GridTextures/Dark/texture_02.png" id="2_16h13"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ig8f"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbsyg"]
 albedo_texture = ExtResource("2_16h13")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_nyhip"]
-material = SubResource("StandardMaterial3D_7ig8f")
+material = SubResource("StandardMaterial3D_kbsyg")
 size = Vector3(100, 1, 100)
 
 [sub_resource type="PrismMesh" id="PrismMesh_ocnd6"]
@@ -25,6 +25,7 @@ transform = Transform3D(0.927334, 0.0655897, 0.368442, -0.374234, 0.162528, 0.91
 
 [node name="Player" parent="." instance=ExtResource("1_8wnd5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+keyboard_control = true
 
 [node name="Floor" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
