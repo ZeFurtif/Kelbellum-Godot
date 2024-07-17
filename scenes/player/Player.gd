@@ -13,8 +13,11 @@ var GRAVITY_DIRECTION : Vector3 = ProjectSettings.get_setting("physics/3d/defaul
 
 
 var raw_move_input : Vector2 = Vector2.ZERO
-var primary_reset : bool = true
-var secondary_reset : bool = true
+var monocible_reset : bool = true
+var multicible_a_reset : bool = true
+var multicible_b_reset : bool = true
+var mobilite_reset : bool = true
+var buff_reset : bool = true
 var ultimate_reset : bool = true
 
 var player_id : int = 0
@@ -23,7 +26,6 @@ var controller_id : int = -1
 
 @onready var Raycast : RayCast3D = $RayCast3D
 @onready var Camera : Camera3D = get_viewport().get_camera_3d()
-
 
 func _ready() -> void :
 	# Debug Mode
@@ -51,6 +53,7 @@ func _physics_process(delta : float) -> void :
 
 func handle_movement(delta : float) -> void :
 	raw_move_input = Vector2.ZERO
+	velocity = Vector3.ZERO
 	
 	if not is_on_floor() :
 		velocity += GRAVITY * GRAVITY_DIRECTION
@@ -103,48 +106,6 @@ func handle_aim() -> void :
 		else:
 			look_at(look_dir)
 	return
-	
-#func handle_move_animation():
-#	var move_length = raw_move_input.length()
-#	if move_length >= 0.5:
-#		var flat_aim = Vector2(Body.global_transform.basis.z.x, Body.global_transform.basis.z.z)
-#		var angle_to_aim = raw_move_input.angle_to(flat_aim*-1)/ PI
-#		var left = -1
-#		if angle_to_aim < 0:
-#			left = 1
-#		var blend_x = (abs(abs(angle_to_aim) - 0.5) - 0.5) * -2 * left
-#		var blend_y = ((abs(angle_to_aim) * 2) - 1) * -1
-#		MyAnimationTree["parameters/IsRunning/blend_amount"] = true
-#		MyAnimationTree["parameters/WalkRunBlend/blend_amount"] = parametric_blend(remap(move_length, 0.5, 1, 0, 1))
-#		MyAnimationTree["parameters/WalkBlend/blend_position"].x = blend_x
-#		MyAnimationTree["parameters/WalkBlend/blend_position"].y = blend_y
-#		MyAnimationTree["parameters/RunBlend/blend_position"].x = blend_x
-#		MyAnimationTree["parameters/RunBlend/blend_position"].y = blend_y
-#	else:
-#		MyAnimationTree["parameters/IsRunning/blend_amount"] = false
-
-func handle_abilities() -> void :
-	if is_using_primary() :
-		if primary_reset :
-			primary_reset = false
-			print("primary")
-	else:
-		primary_reset = true
-	if is_using_secondary() :
-		if secondary_reset :
-			secondary_reset = false
-			print("secondary")
-	else:
-		secondary_reset = true
-	if is_using_ultimate() :
-		if ultimate_reset :
-			ultimate_reset = false
-			print("ultimate")
-	else:
-		ultimate_reset = true
-
-func use_primary() -> void :
-	pass
 
 func get_aimest_valid_target_position(lookdir : Vector3, range : float, lineOfSight : bool) -> Vector3 :
 	var all_targets : Array[Node] = get_tree().get_nodes_in_group("Target")
@@ -163,21 +124,91 @@ func get_aimest_valid_target_position(lookdir : Vector3, range : float, lineOfSi
 		return new_lookdir
 	return lookdir
 
-func is_using_primary() -> bool :
+func handle_abilities() -> void :
+	if is_using_monocible() :
+		if monocible_reset :
+			monocible_reset = false
+			print("monocible")
+	else:
+		monocible_reset = true
+	
+	if is_using_muliticible_a() :
+		if multicible_a_reset :
+			multicible_a_reset = false
+			print("multicible a")
+	else:
+		multicible_a_reset = true
+	
+	if is_using_muliticible_b() :
+		if multicible_b_reset :
+			multicible_b_reset = false
+			print("multicible b")
+	else:
+		multicible_b_reset = true
+	
+	if is_using_mobilite() :
+		if mobilite_reset :
+			mobilite_reset = false
+			print("mobilite")
+	else:
+		mobilite_reset = true
+	
+	if is_using_buff() :
+		if buff_reset :
+			buff_reset = false
+			print("buff")
+	else:
+		buff_reset = true
+	
+	if is_using_ultimate() :
+		if ultimate_reset :
+			ultimate_reset = false
+			print("ultimate")
+	else:
+		ultimate_reset = true
+
+func is_using_monocible() -> bool :
 	if keyboard_control :
-		if Input.is_action_just_pressed("primary"):
+		if Input.is_action_just_pressed("monocible"):
 			return true
 	else :
 		if Input.get_joy_axis(controller_id, JOY_AXIS_TRIGGER_RIGHT) > TRIGGER_DEAD_ZONE :
 			return true
 	return false
 
-func is_using_secondary() -> bool :
+func is_using_muliticible_a() -> bool :
 	if keyboard_control :
-		if Input.is_action_just_pressed("secondary"):
+		if Input.is_action_just_pressed("multicible a"):
 			return true
 	else:
 		if Input.get_joy_axis(controller_id, JOY_AXIS_TRIGGER_LEFT) > TRIGGER_DEAD_ZONE:
+			return true
+	return false
+
+func is_using_muliticible_b() -> bool :
+	if keyboard_control :
+		if Input.is_action_just_pressed("multicible b"):
+			return true
+	else:
+		if Input.is_joy_button_pressed(controller_id, JOY_BUTTON_LEFT_SHOULDER):
+			return true
+	return false
+
+func is_using_mobilite() -> bool :
+	if keyboard_control :
+		if Input.is_action_just_pressed("mobilite"):
+			return true
+	else:
+		if Input.is_joy_button_pressed(controller_id, JOY_BUTTON_A):
+			return true
+	return false
+
+func is_using_buff() -> bool :
+	if keyboard_control :
+		if Input.is_action_just_pressed("buff"):
+			return true
+	else:
+		if Input.is_joy_button_pressed(controller_id, JOY_BUTTON_X):
 			return true
 	return false
 
@@ -186,10 +217,6 @@ func is_using_ultimate() -> bool :
 		if Input.is_action_just_pressed("ultimate"):
 			return true
 	else :
-		if Input.is_joy_button_pressed(controller_id, JOY_BUTTON_LEFT_SHOULDER) and Input.is_joy_button_pressed(controller_id, JOY_BUTTON_RIGHT_SHOULDER):
+		if Input.is_joy_button_pressed(controller_id, JOY_BUTTON_RIGHT_SHOULDER):
 			return true
 	return false
-
-func _parametric_blend(t : float) -> float :
-	var square = pow(t, 2)
-	return square / (2 * (square - t) + 1);
