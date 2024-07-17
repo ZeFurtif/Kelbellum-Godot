@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://36dsqiqo0wqs"]
+
+[ext_resource type="Resource" uid="uid://b8vgsu7ai0iwh" path="res://datas/abilities/SimpleArrow.tres" id="1_bwele"]
+[ext_resource type="Script" path="res://resources/WeaponData.gd" id="2_t8dve"]
+[ext_resource type="Resource" uid="uid://dain0ph41fg6j" path="res://datas/abilities/MultipleArrow.tres" id="2_tfmau"]
+[ext_resource type="Resource" uid="uid://c2citree3pvha" path="res://datas/abilities/RainArrow.tres" id="3_cv38b"]
+
+[resource]
+script = ExtResource("2_t8dve")
+id = 1
+name = "Bow"
+ability1 = ExtResource("1_bwele")
+ability2 = ExtResource("2_tfmau")
+ability3 = ExtResource("3_cv38b")

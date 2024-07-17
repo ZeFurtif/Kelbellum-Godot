@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AttackAbilityData" load_steps=2 format=3 uid="uid://dain0ph41fg6j"]
+
+[ext_resource type="Script" path="res://resources/AttackAbilityData.gd" id="1_aqhs3"]
+
+[resource]
+script = ExtResource("1_aqhs3")
+damage = 1.0
+range = 2.0
+attack_type = 1
+id = 3
+name = "MultipleArrow"
+cooldown = 0.0

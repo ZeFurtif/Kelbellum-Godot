@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://cvis1it4dpsyq"]
+
+[ext_resource type="Resource" uid="uid://d01ed4fb4s0po" path="res://datas/abilities/Burn.tres" id="1_2iuh4"]
+[ext_resource type="Resource" uid="uid://dpfm4j84yyfl6" path="res://datas/abilities/Fireball.tres" id="2_n4i7v"]
+[ext_resource type="Script" path="res://resources/WeaponData.gd" id="2_ttxnf"]
+[ext_resource type="Resource" uid="uid://cinysmebo07cn" path="res://datas/abilities/RainFire.tres" id="3_4new8"]
+
+[resource]
+script = ExtResource("2_ttxnf")
+id = 2
+name = "Stick"
+ability1 = ExtResource("1_2iuh4")
+ability2 = ExtResource("2_n4i7v")
+ability3 = ExtResource("3_4new8")

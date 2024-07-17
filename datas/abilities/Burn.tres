@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AttackAbilityData" load_steps=2 format=3 uid="uid://d01ed4fb4s0po"]
+
+[ext_resource type="Script" path="res://resources/AttackAbilityData.gd" id="1_fk06j"]
+
+[resource]
+script = ExtResource("1_fk06j")
+damage = 1.0
+range = 2.0
+attack_type = 1
+id = 0
+name = "Burn"
+cooldown = 0.0

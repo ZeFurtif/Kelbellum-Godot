@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://4tm5chtsntec"]
+
+[ext_resource type="Resource" uid="uid://b4yuwmd6je88x" path="res://datas/abilities/Knock.tres" id="1_nocyd"]
+[ext_resource type="Script" path="res://resources/WeaponData.gd" id="1_pi6fy"]
+[ext_resource type="Resource" uid="uid://cd7purrcs7vuy" path="res://datas/abilities/Slash.tres" id="2_mqql3"]
+[ext_resource type="Resource" uid="uid://lrehw6b6ukm4" path="res://datas/abilities/WhirlWind.tres" id="3_kekbo"]
+
+[resource]
+script = ExtResource("1_pi6fy")
+id = 0
+name = "Sword"
+ability1 = ExtResource("1_nocyd")
+ability2 = ExtResource("2_mqql3")
+ability3 = ExtResource("3_kekbo")

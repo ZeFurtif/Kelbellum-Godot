@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AttackAbilityData" load_steps=2 format=3 uid="uid://cinysmebo07cn"]
+
+[ext_resource type="Script" path="res://resources/AttackAbilityData.gd" id="1_ydp53"]
+
+[resource]
+script = ExtResource("1_ydp53")
+damage = 1.0
+range = 2.0
+attack_type = 1
+id = 5
+name = "RainFire"
+cooldown = 0.0
