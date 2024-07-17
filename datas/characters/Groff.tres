@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://cyafwoapdcnvu"]
+
+[ext_resource type="Texture2D" uid="uid://dh5203nmgprvo" path="res://assets/2D/sprites/Groff.png" id="1_co0gm"]
+[ext_resource type="Script" path="res://resources/CharacterData.gd" id="2_vqfyw"]
+
+[resource]
+script = ExtResource("2_vqfyw")
+id = 2
+name = "Groff"
+icon = ExtResource("1_co0gm")
+base_health = 55.0
+base_speed = 4.0
