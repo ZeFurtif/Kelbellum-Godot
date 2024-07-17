@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr2nd3ws7mlfo"]
+
+[ext_resource type="Texture2D" uid="uid://caqnwm4bl8d3w" path="res://assets/2D/sprites/Boldric.png" id="1_p13fn"]
+
+[node name="CharacterButton" type="Button"]
+custom_minimum_size = Vector2(150, 150)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource("1_p13fn")
+expand_icon = true

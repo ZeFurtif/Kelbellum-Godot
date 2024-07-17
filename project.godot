@@ -13,12 +13,13 @@ config_version=5
 config/name="Kelbellum"
 run/main_scene="res://scenes/title_menu/TitleMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/2D/ui/menu/game_icon.png"
 
 [autoload]
 
 ControllerManager="*res://scenes/globals/ControllerManager.gd"
 DataManager="*res://scenes/globals/DataManager.gd"
+GameDataLoader="*res://scenes/globals/GameDataLoader.gd"
 
 [display]
 
@@ -33,7 +34,7 @@ project/assembly_name="Kelbellum"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/datatable_godot/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://dorrn7y4bo1hd"]
+
+[ext_resource type="Texture2D" uid="uid://b7bfl2o8idwfg" path="res://assets/2D/sprites/Elas.png" id="1_g1xkp"]
+[ext_resource type="Script" path="res://resources/CharacterData.gd" id="2_jt3nx"]
+
+[resource]
+script = ExtResource("2_jt3nx")
+id = 1
+name = "Elas"
+icon = ExtResource("1_g1xkp")
+base_health = 45.0
+base_speed = 6.0
